@@ -6,7 +6,7 @@ export default {
   head: {
     title: 'portfolio',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'ja',
     },
     meta: [
       { charset: 'utf-8' },
@@ -18,7 +18,12 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['ress'],
+
+  styleResources: {
+    scss: ['~/assets/scss/app.scss', '~/assets/scss/base.scss', '~/assets/scss/global.scss'],
+    hoistUseStatements: true,
+  },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
@@ -32,13 +37,33 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
+
+    '@nuxtjs/style-resources',
+
+    '@nuxtjs/date-fns',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    'nuxt-webfontloader',
+    'nuxt-microcms-module',
   ],
+  webfontloader: {
+    google: {
+      families: ['Ubuntu:wght@400,700&display=swap'],
+    },
+  },
+
+  microcms: {
+    options: {
+      serviceDomain: "myhobbysite",
+      apiKey: "576134c4f4e6469d97185b484f067a62c1a2",
+    },
+    mode: process.env.NODE_ENV === 'production' ? 'server' : 'all',
+  },
+
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
